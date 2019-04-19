@@ -39,3 +39,8 @@ class ModelWrapper:
         )
 
     def metrics_names(self): return self.__model.metrics_names
+
+    def load(self, path):
+        if path:
+            print(f'Load weights from {path}')
+            self.__model.load_weights(path)

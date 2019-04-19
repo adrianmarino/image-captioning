@@ -1,17 +1,13 @@
+import keras.backend as K
 from IPython.display import SVG, display
 from keras.utils.vis_utils import model_to_dot
-import keras.backend as K
-
-from lib.callback.metric_plotter import MetricsPlotter
 
 
 class ModelWrapper:
     def __init__(self, model):
         self.__model = model
 
-    def lr(self): return K.eval(self.__model.optimizer.lr)
-
-    def set_lr(self, value):
+    def lr(self, value):
         self.__model.optimizer.lr = value
         return self
 
@@ -25,8 +21,6 @@ class ModelWrapper:
         ).create(prog='dot', format='svg')))
 
     def fit(self, train_generator, val_generator, epochs, steps_per_epoch, callbacks):
-        print(f'LR: {self.lr()}')
-
         return self.__model.fit_generator(
             generator=train_generator,
             steps_per_epoch=steps_per_epoch,

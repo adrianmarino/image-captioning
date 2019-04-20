@@ -1,0 +1,14 @@
+name: image-captioning
+channels:
+- https://conda.anaconda.org/menpo
+- defaults
+- conda-forge
+- anaconda
+dependencies:
+    - python==3.7
+    - numpy
+    - matplotlib
+    - tensorflow-gpu
+    - keras
+    - pip:
+       - opencv-contrib-python

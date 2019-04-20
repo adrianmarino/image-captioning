@@ -27,6 +27,10 @@ class DataGenerator(BaseDataGenerator):
         X1, X2, y = list(), list(), list()
 
         for image_path, image_descriptions in self._batches[index]:
+            if image_path not in self.__image_features:
+                print(f'Not found image feature for {image_path}. Skip sample!')
+                continue
+
             image_feature = self.__image_features[image_path]
 
             for image_desc in image_descriptions:

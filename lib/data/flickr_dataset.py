@@ -1,6 +1,8 @@
 import os
 import re
 from collections import defaultdict
+
+from lib.utils.array_utils import column
 from lib.utils.file_utils import load_text_from
 from lib.utils.word_utils import clean_punctuation
 
@@ -51,8 +53,9 @@ class FlickrDataset:
     def max_desc_len(self):
         return self.__max_desc_len
 
-    def samples(self):
-        return list(self.__samples.items())
+    def samples(self, col=None):
+        samples = list(self.__samples.items())
+        return samples if col is None else column(samples, col)
 
     def words_occurs(self):
         words = defaultdict(lambda: 0)

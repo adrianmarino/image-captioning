@@ -38,3 +38,5 @@ class ModelWrapper:
         if path:
             print(f'Load weights from {path}')
             self.__model.load_weights(path)
+
+    def predict(self, X, verbose): return self.__model.predict(X, verbose=verbose)

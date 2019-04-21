@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from IPython.display import clear_output
-from dask.tests.test_base import np
+import numpy as np
 from keras.callbacks import Callback
 from lib.model.metrics import MetricMeterBuilder
 import warnings

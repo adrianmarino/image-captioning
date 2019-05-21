@@ -1,4 +1,3 @@
-import keras.backend as K
 from IPython.display import SVG, display
 from keras.utils.vis_utils import model_to_dot
 
@@ -39,4 +38,5 @@ class ModelWrapper:
             print(f'Load weights from {path}')
             self.__model.load_weights(path)
 
-    def predict(self, X, verbose): return self.__model.predict(X, verbose=verbose)
+    def predict(self, X, verbose):
+        return self.__model.predict(X, verbose=verbose)

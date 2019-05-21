@@ -14,7 +14,7 @@ class DataGenerator(BaseDataGenerator):
             max_length,
             vocabulary_size,
             batch_size,
-            shuffle=True
+            shuffle=False
     ):
         super().__init__(samples, batch_size, shuffle)
         self.__image_features = image_features

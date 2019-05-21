@@ -12,5 +12,8 @@ dependencies:
     - keras
     - scikit-learn
     - tqdm
+    - pillow
+    - pydot
     - pip:
-       - opencv-contrib-python
+        - opencv-contrib-python
+        - mtranslate

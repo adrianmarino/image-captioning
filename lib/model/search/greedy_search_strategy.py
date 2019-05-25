@@ -39,7 +39,7 @@ class GreedySearchStrategy:
         return self.__remove_begin_end_seq(phase)
 
     def __predict(self, image_feature, sequence):
-        return self.__model.predict([image_feature, sequence], verbose=0)
+        return self.__model.__predict([image_feature, sequence], verbose=0)
 
     def max_seq_len(self):
         return self.__sequencer.max_seg_len

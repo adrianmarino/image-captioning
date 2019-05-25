@@ -88,9 +88,9 @@ class BeamSearchStrategy:
                     candidate = (seq + [word_ind], score * -log(word_dist[word_ind]))
                     candidates.append(candidate)
 
-            sequences = sorted(candidates, key=lambda tup: tup[1])
+            sequences = sorted(candidates, key=lambda tup: tup[1])[:self.k]
 
         end_seq = self.sequencer.to_seq(self.seq_postfix)
         complete_sequences = [seq for seq in sequences if has_word(seq[0], end_seq)]
-        best_sequences = sorted(complete_sequences, key=lambda tup: tup[1])[:self.k]
-        return [(self.sequencer.to_phrase(seq).replace(self.seq_postfix, ''), score) for seq, score in best_sequences]
+        best_sequences = sorted(complete_sequences, key=lambda tup: tup[1])
+        return [(self.sequencer.to_phrase(seq).replace(self.seq_postfix, ''),  score) for seq, score in best_sequences]

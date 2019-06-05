@@ -7,6 +7,13 @@ from lib.utils.file_utils import load_text_from
 from lib.utils.word_utils import clean_punctuation
 
 
+def to_descriptions(samples):
+    descriptions = []
+    for _, descs in samples:
+        for desc in descs:
+            descriptions.append(desc)
+    return descriptions
+
 class FlickrDataset:
     def __init__(
             self,
@@ -65,6 +72,9 @@ class FlickrDataset:
                     if word not in [self.__desc_prefix, self.__desc_prefix]:
                         words[word] = words[word] + 1
         return words
+
+    def descriptions(self):
+        return to_descriptions(self.samples())
 
     def words_set(self, min_occurs=0):
         words_occurs = self.words_occurs()

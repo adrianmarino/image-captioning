@@ -15,6 +15,9 @@ dependencies:
     - pillow
     - pydot
     - pandas
+    - nltk
+    - gensim
+    - pyemd
     - pip:
         - opencv-contrib-python
         - mtranslate

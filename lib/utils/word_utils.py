@@ -1,6 +1,10 @@
 import string
 
 
+def remove_pre_post_fix(text, prefix='$', postfix='#'):
+    return text.replace(prefix, '').replace(postfix, '').strip()
+
+
 def clean_punctuation(phase):
     # prepare translation table for removing punctuation
     table = str.maketrans('', '', string.punctuation)

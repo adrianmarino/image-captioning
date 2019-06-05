@@ -49,8 +49,8 @@ class PredictionInspector:
                 columns=[
                     'Predicted Description',
                     'Description Score (⟱ best)',
-                    'WMD Mean',
-                    'WMD (⟰ best)',
+                    'WMD Similarity Mean (⟰ best)',
+                    'WMD Similarity (⟰ best)',
                     'Sample Description'
                 ]
             )

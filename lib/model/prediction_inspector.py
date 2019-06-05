@@ -31,15 +31,15 @@ class PredictionInspector:
 
             begin = True
             for wmd_score, sample_desc in similarities:
-                row = [remove_pre_post_fix(sample_desc), f'{wmd_score:2.10f}']
+                row = [f'{wmd_score:2.10f}', remove_pre_post_fix(sample_desc)]
 
                 if not begin:
-                    rows_prefix = ['', '']
-                    rows_postfix = ['']
+                    rows_prefix = ['', '', '']
+                    rows_postfix = []
                 else:
                     begin = False
-                    rows_prefix = [pred_desc.strip(), f'{pred_score:2.10f}']
-                    rows_postfix = [f'{mean_sim:2.10f}']
+                    rows_prefix = [pred_desc.strip(), f'{pred_score:2.10f}', f'{mean_sim:2.10f}']
+                    rows_postfix = []
 
                 rows.append(rows_prefix + row + rows_postfix)
 
@@ -49,9 +49,9 @@ class PredictionInspector:
                 columns=[
                     'Predicted Description',
                     'Description Score (⟱ best)',
-                    'Sample Description',
+                    'WMD Mean',
                     'WMD (⟰ best)',
-                    'WMD Mean'
+                    'Sample Description'
                 ]
             )
         )

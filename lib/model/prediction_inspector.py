@@ -29,25 +29,29 @@ class PredictionInspector:
             similarities = self.__similarity_meter.measure(pred_desc, sample_descriptions)
             mean_sim = mean(similarities)
 
-            rows_group = [f'{pred_score:2.10f}', pred_desc.strip(), f'{mean_sim:2.10f}']
-            index = 0
+            begin = True
             for wmd_score, sample_desc in similarities:
-                row_postfix = [f'{wmd_score:2.10f}', remove_pre_post_fix(sample_desc)]
-                if index > 0:
-                    rows_group = ['', '', '']
+                row = [remove_pre_post_fix(sample_desc), f'{wmd_score:2.10f}']
+
+                if not begin:
+                    rows_prefix = ['', '']
+                    rows_postfix = ['']
                 else:
-                    index += 1
-                rows.append(rows_group + row_postfix)
+                    begin = False
+                    rows_prefix = [pred_desc.strip(), f'{pred_score:2.10f}']
+                    rows_postfix = [f'{mean_sim:2.10f}']
+
+                rows.append(rows_prefix + row + rows_postfix)
 
         display(
             pd.DataFrame(
                 rows,
                 columns=[
-                    'Predicted Score (< best)',
                     'Predicted Description',
-                    'WMD Mean',
-                    'WMD (> best)',
-                    'Sample Description'
+                    'Description Score (⟱ best)',
+                    'Sample Description',
+                    'WMD (⟰ best)',
+                    'WMD Mean'
                 ]
             )
         )

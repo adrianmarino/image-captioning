@@ -21,3 +21,4 @@ dependencies:
     - pip:
         - opencv-contrib-python
         - mtranslate
+        - humanization

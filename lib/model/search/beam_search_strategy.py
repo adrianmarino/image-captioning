@@ -26,7 +26,8 @@ class BeamSearchStrategy:
             sequencer,
             seq_prefix,
             seq_postfix,
-            k
+            k,
+            verbose=True
     ):
         self.model = model
         self.sequencer = sequencer
@@ -34,6 +35,7 @@ class BeamSearchStrategy:
         self.seq_postfix = seq_postfix
         self.k = k
         self.seq_end = self.sequencer.to_seq(self.seq_postfix)[0]
+        self.__verbose = verbose
 
     def __predict(self, image_feature, sequence):
         return self.model.predict([image_feature, self.sequencer.pad(sequence)], verbose=0)
@@ -58,7 +60,8 @@ class BeamSearchStrategy:
                     candidates.append(candidate)
 
             sequences = sorted(candidates, key=lambda tup: tup[1], reverse=True)[:self.k]
-            # display(self.__as_phrases(sequences))
+            if self.__verbose:
+                display(self.__as_phrases(sequences))
 
         return self.__as_phrases(sorted(sequences, key=lambda tup: tup[1], reverse=True))
 

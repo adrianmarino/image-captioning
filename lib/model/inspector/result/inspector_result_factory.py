@@ -31,20 +31,24 @@ class InspectorResultFactory:
             _sim_mean = sim_mean(similarities)
             begin = True
 
+            column_names = self.__column_names.copy()
+            if k == 1:
+                column_names.pop(1)
+
             for wmd_score, sample_desc in similarities:
-                row = [f'{wmd_score:2.10f}', remove_pre_post_fix(sample_desc)]
+                row = [wmd_score, remove_pre_post_fix(sample_desc)]
 
                 if not begin:
                     rows_prefix = ['', '', '']
                     rows_postfix = []
                 else:
                     begin = False
-                    rows_prefix = [pred_desc.strip(), f'{(pred_score):2.10f}', f'{_sim_mean:2.4f}']
+                    rows_prefix = [pred_desc.strip(), pred_score, _sim_mean]
                     rows_postfix = []
 
-                rows.append(rows_prefix + row + rows_postfix)
+                complete_row = rows_prefix + row + rows_postfix
+                if k == 1:
+                    complete_row.pop(1)
+                rows.append(complete_row)
 
-        return InspectorResult(
-            image_path,
-            pd.DataFrame(rows, columns=self.__column_names)
-        )
+        return InspectorResult(image_path, pd.DataFrame(rows, columns=column_names))

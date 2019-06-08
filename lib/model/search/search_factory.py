@@ -12,12 +12,14 @@ class SearchFactory:
             max_seq_len,
             seq_prefix='$',
             seq_postfix='#',
-            k=7
+            k=7,
+            verbose=True
     ):
         return BeamSearchStrategy(
             model=model,
             sequencer=Sequencer(word_to_index, index_to_word, max_seq_len),
             seq_prefix=seq_prefix,
             seq_postfix=seq_postfix,
-            k=k
+            k=k,
+            verbose=verbose
         )

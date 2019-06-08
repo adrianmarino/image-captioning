@@ -1,5 +1,3 @@
-import pandas as pd
-from IPython.core.display import HTML
 from IPython.display import display
 
 from lib.utils.plot_utils import show_img
@@ -13,3 +11,6 @@ class InspectorResult:
     def show(self, image_width=500):
         show_img(self.image_path, image_width=image_width)
         display(self.data)
+
+    def wmd_sim(self):
+        return self.data['WMDSim Mean (⟰ best)'][0]

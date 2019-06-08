@@ -17,4 +17,4 @@ class Sequencer:
         return pad_sequences([sequence], maxlen=self.max_seg_len)
 
     def to_phrase(self, sequence):
-        return ' '.join([self.__index_to_word[i] for i in sequence])
+        return ' '.join([self.__index_to_word[i].strip() for i in sequence]).strip()

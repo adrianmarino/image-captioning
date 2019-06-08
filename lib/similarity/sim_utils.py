@@ -24,7 +24,7 @@ def normalize(descriptions):
     return [preprocess(desc) for desc in descriptions]
 
 
-def mean(similarities):
+def sim_mean(similarities):
     return reduce(lambda a, b: a + b, [sim[0] for sim in similarities]) / len(similarities)
 
 

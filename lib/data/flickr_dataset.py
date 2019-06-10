@@ -14,6 +14,7 @@ def to_descriptions(samples):
             descriptions.append(desc)
     return descriptions
 
+
 class FlickrDataset:
     def __init__(
             self,

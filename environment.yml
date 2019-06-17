@@ -21,3 +21,5 @@ dependencies:
     - pip:
         - opencv-contrib-python
         - mtranslate
+        - tensorflow_hub
+        - ipywidgets

@@ -10,5 +10,4 @@ def create_path(path):
 
 def min_file_path_from(path, min_func):
     list_of_files = glob.glob(path)
-    latest_file = min(list_of_files, key=min_func)
-    return latest_file
+    return min(list_of_files, key=min_func)

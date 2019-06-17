@@ -33,4 +33,3 @@ def word_to_index_and_index_to_word(vocabulary):
         index_to_word[index] = word
 
     return word_to_index, index_to_word
-

@@ -45,7 +45,7 @@ class FlickrDataset:
                 clean_desc
             )
 
-            desc_len = self.__desc_len(desc)
+            desc_len = len(desc.split())
             if desc_len > self.__max_desc_len:
                 self.__max_desc_len = desc_len
                 max_len_desc = desc
@@ -54,9 +54,6 @@ class FlickrDataset:
 
         print(f'Max len desc: {max_len_desc}')
         self.__samples = samples
-
-    def __desc_len(self, desc):
-        return len(desc) - len(self.__desc_prefix) - len(self.__desc_postfix)
 
     def max_desc_len(self):
         return self.__max_desc_len
@@ -70,8 +67,7 @@ class FlickrDataset:
         for descs in self.__samples.values():
             for desc in descs:
                 for word in desc.split(' '):
-                    if word not in [self.__desc_prefix, self.__desc_prefix]:
-                        words[word] = words[word] + 1
+                    words[word] = words[word] + 1
         return words
 
     def descriptions(self):

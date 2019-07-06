@@ -50,15 +50,15 @@ class MetricsPlotter(Callback):
 
             score = self.__evaluate_model()
             output = self.__build_metric_meters(logs, score)
-            if self.i > 1:
+            if self.validation_generator and self.i > 1:
                 self.__print_meters(output)
-            print('\nContinue model train:')
+                print('\nContinue model train:')
 
         self.__update_batch_index()
 
 
     def __update_batch_index(self):
-        if self.val_bach_index < len(self.get_validation_data()):
+        if self.validation_generator  and self.val_bach_index < len(self.get_validation_data()):
             self.val_bach_index += 1
         else:
             self.val_bach_index = 0
@@ -72,24 +72,29 @@ class MetricsPlotter(Callback):
         meter_builder = MetricMeterBuilder(self.val_metrics_values)
         for index, metric in enumerate(self.model.metrics_names):
             self.metrics_values[metric].append(logs.get(metric))
-            self.val_metrics_values[metric].append(score[index])
-            output.append(meter_builder.build(metric))
+
+            if self.validation_generator is not None:
+                self.val_metrics_values[metric].append(score[index])
+                output.append(meter_builder.build(metric))
         return output
 
     def __evaluate_model(self):
-        print(f'\n\nEvaluate model (Each {self.__evaluate_interval } steps):')
-        val_features, val_labels = self.get_validation_data()
-        score = self.model.evaluate(
-            val_features,
-            val_labels,
-            batch_size=self.batch_size,
-            verbose=1
-        )
-        score = np.array(score).flatten()
-        return score
+        if self.validation_generator is not None:
+            print(f'\n\nEvaluate model (Each {self.__evaluate_interval} steps):')
+            val_features, val_labels = self.get_validation_data()
+            score = self.model.evaluate(
+                val_features,
+                val_labels,
+                batch_size=self.batch_size,
+                verbose=1
+            )
+            return np.array(score).flatten()
+        else:
+            return np.array([])
 
     def __update_metric_graphs(self):
         clear_output(wait=True)
+
         f, axes = plt.subplots(1, len(self.model.metrics_names), figsize=(30, 8))
         for index, metric in enumerate(self.model.metrics_names):
             if len(self.model.metrics_names) > 1:
@@ -98,7 +103,10 @@ class MetricsPlotter(Callback):
                 axis = axes
 
             axis.plot(self.x, self.metrics_values[metric], label=metric)
-            axis.plot(self.x, self.val_metrics_values[metric], label=f'val_{metric}')
+
+            if self.validation_generator is not None:
+                axis.plot(self.x, self.val_metrics_values[metric], label=f'val_{metric}')
+
             axis.legend()
         plt.show()
 

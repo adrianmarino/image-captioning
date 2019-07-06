@@ -17,7 +17,7 @@ def clean_punctuation(phase):
     # remove punctuation from each token
     words = [word.translate(table) for word in words]
     # remove hanging 's' and 'a'
-    words = [word for word in words if len(word)>1]
+    words = [word for word in words if len(word) > 1]
     # remove tokens with numbers in them
     words = [word for word in words if word.isalpha()]
     # store as string
@@ -28,8 +28,10 @@ def word_to_index_and_index_to_word(vocabulary):
     index_to_word = {}
     word_to_index = {}
 
-    for index, word in enumerate(vocabulary):
+    index = 1
+    for word in vocabulary:
         word_to_index[word] = index
         index_to_word[index] = word
+        index += 1
 
     return word_to_index, index_to_word

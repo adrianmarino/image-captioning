@@ -8,3 +8,4 @@ dataset/
 weights/
 logs/
 metrics
+world2vec_embedding.model

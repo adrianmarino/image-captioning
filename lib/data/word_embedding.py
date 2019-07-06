@@ -18,7 +18,7 @@ if type(tf.contrib) != types.ModuleType:  # if it is LazyLoader
 
 class WordEmbedding(abc.ABC):
     @abc.abstractmethod
-    def encode(self, index_to_word):
+    def encode(self, index_to_word, vocabulary_size):
         pass
 
     @staticmethod
@@ -39,12 +39,18 @@ class ElmoWordEmbedding:
     def __encode(self, words):
         return self.__embed(tf.squeeze(tf.cast(words, tf.string)), signature="default", as_dict=True)["default"]
 
-    def encode(self, word_to_index):
+    def encode(self, word_to_index, vocabulary_size):
         words = [word for word, _ in list(word_to_index.items())]
         with tf.Session() as session:
             session.run([tf.global_variables_initializer(), tf.tables_initializer()])
-            results = session.run(self.__encode([words]))
-        return results
+            embedding_matrix = session.run(self.__encode([words]))
+
+            # Add a zeros vector to first position to begin index from 1 to n.
+            first_vector = np.zeros(embedding_matrix.shape[1])
+            embedding_matrix = np.vstack([first_vector, embedding_matrix])
+
+            assert vocabulary_size == embedding_matrix.shape[0], f'Invalid embedding_matrix size = {embedding_matrix.shape[0]}'
+            return embedding_matrix
 
 
 @WordEmbedding.register
@@ -86,8 +92,8 @@ class GloveWordEmbedding:
                 if self.__verbose and found_words < len(word_to_index):
                     pbar.write("Warn: Not found all words!")
 
-    def encode(self, word_to_index):
-        embedding_matrix = np.zeros((len(word_to_index), self.__vector_dim))
+    def encode(self, word_to_index, vocabulary_size):
+        embedding_matrix = np.zeros((vocabulary_size, self.__vector_dim))
 
         for index, vector in list(self.__encode(word_to_index)):
             embedding_matrix[index] = vector

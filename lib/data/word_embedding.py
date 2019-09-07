@@ -84,8 +84,10 @@ class GloveWordEmbedding:
                     if word in word_to_index:
                         found_words += 1
                         pbar.update(1)
-                        pbar.set_description(f'Processing "{word}"')
                         yield (word_to_index[word], coefficients)
+
+                    if pbar.n % 30:
+                        pbar.set_description(f'Processing "{word}"')
 
                     line = file.readline()
 

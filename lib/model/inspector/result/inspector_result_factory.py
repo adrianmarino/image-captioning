@@ -28,7 +28,7 @@ class InspectorResultFactory:
 
         for pred_desc, pred_score in predicted_descriptions:
             similarities = self.__similarity_meter.measure(pred_desc, sample_descriptions)
-            _sim_mean = sim_mean(similarities)
+            _sim_mean = sim_mean(similarities) if len(similarities) > 0 else 0
             begin = True
 
             column_names = self.__column_names.copy()

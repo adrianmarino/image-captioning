@@ -57,7 +57,7 @@ $ cd ~/project/dataset
 $ unzip flickr30k_images.zip
 ```
 
-**Step 6**: finally change directories structure like this.
+**Step 6**: Finally change directories structure like this.
 
 ![dataset structure](https://raw.githubusercontent.com/adrianmarino/image-captioning/master/images/dataset-tree.png)
 

@@ -4,7 +4,6 @@
 ## Requeriments
 
 * [anaconda](https://www.anaconda.com/download/#linux)
-* 7z
 * 3D video card (GPU) (i.e. [GeForce GTX 1060](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1060/) or higher)
 
 ## Setup

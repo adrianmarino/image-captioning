@@ -2,7 +2,7 @@
 # ----------------------------------------------------------------------------------------------------------------------
 # Settings
 # ----------------------------------------------------------------------------------------------------------------------
-GLOVE_PATH="embedding/glove"
+EMBEDDING_PATH="embedding"
 GLOVE_6B_FILE="glove.6B.zip"
 GLOVE_840B_FILE="glove.840B.300d.zip"
 GLOVO_URL="http://nlp.stanford.edu/data"
@@ -27,8 +27,8 @@ function download-glove-file() {
 # ----------------------------------------------------------------------------------------------------------------------
 # Main
 # ----------------------------------------------------------------------------------------------------------------------
-mkdir -p $GLOVE_PATH
-cd $GLOVE_PATH
+mkdir -p $EMBEDDING_PATH
+cd $EMBEDDING_PATH
 download-glove-file $GLOVE_6B_FILE
 download-glove-file $GLOVE_840B_FILE
 cd ..
@@ -39,5 +39,5 @@ curl -L "$ELMO_URL" | tar -zxvC elmo
 echo "=> Downloaded $GLOVE_6B_FILE, $GLOVE_840B_FILE and elmo word embeddings under embedding path."
 
 cd ..
-tree embedding
+tree $EMBEDDING_PATH
 # ----------------------------------------------------------------------------------------------------------------------

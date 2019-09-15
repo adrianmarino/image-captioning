@@ -59,7 +59,7 @@ $ unzip flickr30k_images.zip
 
 **Step 6**: Finally change directories structure like this.
 
-![dataset structure](https://raw.githubusercontent.com/adrianmarino/image-captioning/master/images/dataset-tree.png)
+<img alt="dataset structure" src="https://raw.githubusercontent.com/adrianmarino/image-captioning/master/images/dataset-tree.png" height="250" />
 
 
 ## Train/Test model

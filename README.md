@@ -5,10 +5,18 @@
 
 * [anaconda](https://www.anaconda.com/download/#linux)
 * 3D video card (i.e. [GeForce GTX 1060](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1060/) or higher)
-* Flickr8k dataset
-* Flickr30k dataset (Optional: More example, more gup time to train the model).
-* Glove word embedding
-* Elmo embedding(Optional)
+
+## USed datasets & world embeddings
+
+* Datasets
+  * Flickr8k dataset.
+  * [Flickr30k](https://www.kaggle.com/hsankesara/flickr-image-dataset/version/1#) dataset.
+
+* Word embedings
+    * [Glove word embedding](https://nlp.stanford.edu/projects/glove/)
+      * [glove.6B.zip](nlp.stanford.edu/data/glove.6B.zip)
+      * [glove.840B.300d](nlp.stanford.edu/data/glove.840B.300d.zip)
+    * [Elmo embedding](https://allennlp.org/elmo)
 
 ## Setup
 

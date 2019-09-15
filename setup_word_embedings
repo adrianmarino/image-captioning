@@ -31,10 +31,13 @@ mkdir -p $GLOVE_PATH
 cd $GLOVE_PATH
 download-glove-file $GLOVE_6B_FILE
 download-glove-file $GLOVE_840B_FILE
-cd ../
+cd ..
 
 mkdir -p elmo
 curl -L "$ELMO_URL" | tar -zxvC elmo
 
 echo "=> Downloaded $GLOVE_6B_FILE, $GLOVE_840B_FILE and elmo word embeddings under embedding path."
+
+cd ..
+tree embedding
 # ----------------------------------------------------------------------------------------------------------------------

@@ -9,9 +9,8 @@
 ## Used datasets & world embeddings
 
 * Datasets
-  * Flickr8k dataset.
-  * Flickr30k
-  
+  * Flickr 8k
+  * Flickr 30k
 * Word embedings
     * [Glove word embedding](https://nlp.stanford.edu/projects/glove/)
       * glove.6B

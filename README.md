@@ -9,7 +9,7 @@
 ## Used datasets & world embeddings
 
 * Datasets
-  * [Flickr8k](https://forms.illinois.edu/sec/1713398) dataset.
+  * Flickr8k dataset.
   * [Flickr30k](https://www.kaggle.com/hsankesara/flickr-image-dataset/version/1#) dataset.
 
 * Word embedings

@@ -3,13 +3,13 @@
 
 ## Requeriments
 
-* [anaconda](https://www.anaconda.com/download/#linux)
+* [anaconda/anaconda-natigator](https://www.anaconda.com/download/#linux)
 * 3D video card (i.e. [GeForce GTX 1060](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1060/) or higher)
 
-## USed datasets & world embeddings
+## Used datasets & world embeddings
 
 * Datasets
-  * Flickr8k dataset.
+  * [Flickr8k](https://forms.illinois.edu/sec/1713398) dataset.
   * [Flickr30k](https://www.kaggle.com/hsankesara/flickr-image-dataset/version/1#) dataset.
 
 * Word embedings

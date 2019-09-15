@@ -10,12 +10,12 @@
 
 * Datasets
   * Flickr8k dataset.
-  * [Flickr30k](https://www.kaggle.com/hsankesara/flickr-image-dataset/version/1#) dataset.
-
+  * Flickr30k
+  
 * Word embedings
     * [Glove word embedding](https://nlp.stanford.edu/projects/glove/)
-      * [glove.6B.zip](nlp.stanford.edu/data/glove.6B.zip)
-      * [glove.840B.300d](nlp.stanford.edu/data/glove.840B.300d.zip)
+      * glove.6B
+      * glove.840B.300d
     * [Elmo embedding](https://allennlp.org/elmo)
 
 ## Setup environment

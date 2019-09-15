@@ -18,6 +18,7 @@ dependencies:
     - nltk
     - gensim
     - pyemd
+    - pip
     - pip:
         - opencv-contrib-python
         - mtranslate

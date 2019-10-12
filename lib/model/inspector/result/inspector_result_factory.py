@@ -22,12 +22,11 @@ class InspectorResultFactory:
         self.__similarity_meter = SimilarityMeter(descriptions)
 
     def create(self, sample, predicted_descriptions, k):
-        image_path, sample_descriptions = sample
         predicted_descriptions = sorted(predicted_descriptions, key=lambda tup: tup[1])[:k]
         rows = []
 
         for pred_desc, pred_score in predicted_descriptions:
-            similarities = self.__similarity_meter.measure(pred_desc, sample_descriptions)
+            similarities = self.__similarity_meter.measure(pred_desc, sample.descriptions)
             _sim_mean = sim_mean(similarities) if len(similarities) > 0 else 0
             begin = True
 
@@ -51,4 +50,4 @@ class InspectorResultFactory:
                     complete_row.pop(1)
                 rows.append(complete_row)
 
-        return InspectorResult(image_path, pd.DataFrame(rows, columns=column_names))
+        return InspectorResult(sample.path, pd.DataFrame(rows, columns=column_names))

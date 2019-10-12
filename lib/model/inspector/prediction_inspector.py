@@ -5,7 +5,7 @@ class PredictionInspector:
         self.__image_features = image_features
 
     def inspect(self, sample, show=True, pred_desc_count=1):
-        predicted_descriptions = self.__predict(sample[0])
+        predicted_descriptions = self.__predict(sample.path)
 
         result = self.__result_factory.create(sample, predicted_descriptions, pred_desc_count)
         if show:

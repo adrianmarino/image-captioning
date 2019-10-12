@@ -18,4 +18,7 @@ def get_loss_model_weights_path(file_path):
 
 
 def get_best_weights_file_from(path):
-    return min_file_path_from(f'./{path}/*.h5', get_loss_model_weights_path)
+    path_pattern = f'./{path}/*.h5'
+    result = min_file_path_from(path_pattern, get_loss_model_weights_path)
+    print(result)
+    return None if path_pattern == result else result

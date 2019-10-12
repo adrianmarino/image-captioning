@@ -14,12 +14,12 @@ def random_sample(samples):
     return samples[index]
 
 
-def random_samples(samples, count=20, resolve_id=lambda sample: sample[0]):
+def random_samples(samples, count=20):
     results = {}
     while len(results) < count:
         sample = random_sample(samples)
-        if not resolve_id(sample) in results:
-            results.update({sample[0]: sample})
+        if sample.id not in results:
+            results.update({sample.id: sample})
     return list(results.values())
 
 

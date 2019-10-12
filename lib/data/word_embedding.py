@@ -18,7 +18,7 @@ if type(tf.contrib) != types.ModuleType:  # if it is LazyLoader
 
 class WordEmbedding(abc.ABC):
     @abc.abstractmethod
-    def encode(self, index_to_word, vocabulary_size):
+    def encode(self, word_to_index, vocabulary_size):
         pass
 
     @staticmethod
@@ -49,7 +49,8 @@ class ElmoWordEmbedding:
             first_vector = np.zeros(embedding_matrix.shape[1])
             embedding_matrix = np.vstack([first_vector, embedding_matrix])
 
-            assert vocabulary_size == embedding_matrix.shape[0], f'Invalid embedding_matrix size = {embedding_matrix.shape[0]}'
+            assert vocabulary_size == embedding_matrix.shape[
+                0], f'Invalid embedding_matrix size = {embedding_matrix.shape[0]}'
             return embedding_matrix
 
 
@@ -67,37 +68,35 @@ class GloveWordEmbedding:
         num_lines = get_num_lines(self.__path)
 
         with open(self.__path, encoding='utf-8') as file:
-            with tqdm.tqdm(total=len(word_to_index), file=sys.stdout) as pbar:
-                found_words = 0
-                lines_count = 0
+            with tqdm.tqdm(total=num_lines, file=sys.stdout) as pbar:
+                found_words = []
                 line = file.readline()
-                while line and found_words < len(word_to_index):
-                    lines_count += 1
+                while line and len(found_words) < len(word_to_index):
                     word, coefficients = self.__word_coefficients(line)
 
                     if len(coefficients) != self.__vector_dim:
                         if self.__verbose:
                             pbar.write(
-                                f'Warn: Skip invalid coefs len!. Word:"{word}", Coefs:{len(coefficients)}, Tot:{len(line.split())}.')
+                                f'WARN: Skip invalid coefs len!. Word:"{word}", Coefs:{len(coefficients)}, Tot:{len(line.split())}.')
                         continue
 
                     if word in word_to_index:
-                        found_words += 1
-                        pbar.update(1)
+                        found_words.append(word)
+                        pbar.set_description(f'Found "{word.ljust(20)}"')
                         yield (word_to_index[word], coefficients)
 
-                    if pbar.n % 30:
-                        pbar.set_description(f'Processing "{word}"')
-
+                    pbar.update(1)
                     line = file.readline()
 
-                if self.__verbose and found_words < len(word_to_index):
-                    pbar.write("Warn: Not found all words!")
+                if len(found_words) < len(word_to_index):
+                    missing_words = word_to_index.keys() - found_words
+                    raise Exception(f'ERROR: Not found all words!. Missing words: {missing_words}')
 
     def encode(self, word_to_index, vocabulary_size):
-        embedding_matrix = np.zeros((vocabulary_size, self.__vector_dim))
+        index_coefficients = list(self.__encode(word_to_index))
+        embedding_matrix = np.zeros((len(index_coefficients), self.__vector_dim))
 
-        for index, vector in list(self.__encode(word_to_index)):
+        for index, vector in index_coefficients:
             embedding_matrix[index] = vector
 
         return embedding_matrix

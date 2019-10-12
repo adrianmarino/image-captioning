@@ -26,14 +26,14 @@ class DataGenerator(BaseDataGenerator):
     def __getitem__(self, index):
         X1, X2, y = list(), list(), list()
 
-        for image_path, image_descriptions in self._batches[index]:
-            if image_path not in self.__image_features:
-                print(f'Not found image feature for {image_path}. Skip sample!')
+        for sample in self._batches[index]:
+            if sample.path not in self.__image_features:
+                print(f'Not found image feature for {sample.path}. Skip sample!')
                 continue
 
-            image_feature = self.__image_features[image_path]
+            image_feature = self.__image_features[sample.path]
 
-            for image_desc in image_descriptions:
+            for image_desc in sample.descriptions:
                 desc_seq = self.__to_sequence(image_desc)
 
                 # split one sequence into multiple X, y pairs

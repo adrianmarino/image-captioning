@@ -28,10 +28,8 @@ def word_to_index_and_index_to_word(vocabulary):
     index_to_word = {}
     word_to_index = {}
 
-    index = 1
-    for word in vocabulary:
+    for index, word in enumerate(vocabulary):
         word_to_index[word] = index
         index_to_word[index] = word
-        index += 1
 
     return word_to_index, index_to_word

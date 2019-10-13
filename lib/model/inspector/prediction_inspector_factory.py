@@ -22,7 +22,7 @@ class PredictionInspectorFactory:
             descriptions,
             max_seq_len,
             k,
-            verbose=False
+            verbose=True
     ):
         return PredictionInspectorFactory.create(
             search=SearchFactory.beam_search(

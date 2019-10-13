@@ -1,3 +1,5 @@
+from math import log
+
 from IPython.display import display
 
 from lib.utils.array_utils import args_max
@@ -53,8 +55,8 @@ class BeamSearchStrategy:
                     continue
 
                 word_dist = self.__predict(image_feature, seq)[0]
-                top_word_ind = args_max(word_dist, top=self.k)
 
+                top_word_ind = args_max(word_dist, top=self.k)
                 for word_ind in top_word_ind:
                     candidate = (seq + [word_ind], score * word_dist[word_ind])
                     candidates.append(candidate)
@@ -66,4 +68,5 @@ class BeamSearchStrategy:
         return self.__as_phrases(sorted(sequences, key=lambda tup: tup[1], reverse=True))
 
     def __as_phrases(self, sequences):
-        return [(self.sequencer.to_phrase(seq).replace(self.seq_postfix, '').strip(), score) for seq, score in sequences]
+        return [(self.sequencer.to_phrase(seq).replace(self.seq_postfix, '').strip(), score) for seq, score in
+                sequences]

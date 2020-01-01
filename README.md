@@ -65,6 +65,6 @@ $ unzip flickr30k_images.zip
 
 You can train, test and adjust model from [Image captioning notebook](https://github.com/adrianmarino/image-captioning/blob/master/image-captioning.ipynb). 
 
-## Work embeddings
+## Word embeddings
 
 Word embedding use examples: [word_embedding_examples](https://github.com/adrianmarino/image-captioning/blob/master/word_embedding_examples.ipynb).
